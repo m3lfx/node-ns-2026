@@ -1,0 +1,44 @@
+const connection = require('../config/database');
+
+exports.getAllItems = (req, res) => {
+    const sql = 'SELECT * FROM item i INNER JOIN stock s ON i.item_id = s.item_id';
+
+    try {
+        connection.query(sql, (err, rows, fields) => {
+            if (err instanceof Error) {
+                console.log(err);
+                return;
+            }
+
+            // console.log(rows);
+            // console.log(fields);
+            return res.status(200).json({
+                rows,
+            })
+        });
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+exports.getSingleItem = (req, res,) => {
+    const sql = 'SELECT * FROM item i INNER JOIN stock s ON i.item_id = s.item_id  WHERE i.item_id = ?'
+    console.log(req.params)
+    const values = [parseInt(req.params.id)];
+    try {
+        connection.execute(sql, values, (err, result, fields) => {
+            if (err instanceof Error) {
+                console.log(err);
+                return;
+            }
+
+            return res.status(200).json({
+                success: true,
+                result
+            })
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
