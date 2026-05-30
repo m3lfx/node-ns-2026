@@ -2,7 +2,7 @@ const connection = require('../config/database');
 const sendEmail = require('../utils/sendEmail')
 
 exports.createOrder = (req, res, next) => {
-    // [
+    // {
     //     "cart": [
     //         {
     //             "item_id": 70,
@@ -17,10 +17,10 @@ exports.createOrder = (req, res, next) => {
     //             "quantity": 1
     //         }
     //     ]
-    // ]
-    console.log(req.body,)
-    const { cart, user } = req.body;
-    console.log(cart, user)
+    // }
+    // console.log(req.body,)
+    const { cart, } = req.body;
+    console.log(cart,)
 
     const dateOrdered = new Date();
     const dateShipped = new Date();
